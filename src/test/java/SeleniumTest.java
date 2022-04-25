@@ -2,15 +2,24 @@ import org.junit.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
+
+import java.io.File;
 
 public class SeleniumTest {
     public WebDriver driver;
+    String adblock = "/Users/Lenovo/Downloads/adblock_plus-3.11.4-an+fx.xpi";
+    File adblockfile = new File(adblock);
+    FirefoxProfile profile = new FirefoxProfile();
 
     @Before
     public void setup() {
         WebDriverManager.firefoxdriver().setup();
-
-        driver = new FirefoxDriver();
+        profile.addExtension(adblockfile);
+        FirefoxOptions options = new FirefoxOptions();
+        options.setProfile(profile);
+        driver = new FirefoxDriver(options);
         driver.manage().window().maximize();
     }
 
@@ -126,9 +135,9 @@ public class SeleniumTest {
     // Note!!!!!!: You can only register twice for the same IP in 24 hours
     public void testRegister() {
         MainPage mainPage = new MainPage(this.driver);
-        AfterLoginPage registered = mainPage.register("tigerhy364","2BjdsDzw9nYnFWM");
+        AfterLoginPage registered = mainPage.register("tigerhy37123","2BjdsDzw9nYnFWM");
         String bodyText = registered.getBodyText();
-        Assert.assertTrue(bodyText.contains("tigerhy364"));
+        Assert.assertTrue(bodyText.contains("tigerhy37123"));
     }
 
 

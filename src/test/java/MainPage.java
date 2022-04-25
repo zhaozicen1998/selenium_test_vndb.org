@@ -1,16 +1,4 @@
-import com.beust.ah.A;
-import org.junit.*;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
-
-import java.util.List;
-import java.util.Set;
-
-//import org.openqa.selenium.firefox.FirefoxDriver;
-//
-//import org.openqa.selenium.support.ui.WebDriverWait;
-//import org.openqa.selenium.support.ui.ExpectedConditions;
-
 
 class MainPage extends PageBase {
 
@@ -36,8 +24,8 @@ class MainPage extends PageBase {
     private By verifyEmailBy = By.xpath("/html/body/section[2]/div/div/div[2]/div[1]/table/tbody/tr[1]/td[2]/a");
     private By verifyEmailLinkBy = By.xpath("/html/body/section[2]/div/div/div[2]/div[1]/div/div[3]/a");
 
-    private By registerSetNewPassword = By.xpath("//*[@id=\"newpass1\"]");
-    private By registerRepeatPassword = By.xpath("//*[@id=\"newpass2\"]");
+    private By registerSetNewPassword = By.id("newpass1");
+    private By registerRepeatPassword = By.id("newpass2");
     private By setPasswordSubmit = By.xpath("/html/body/div[4]/form/fieldset/div[2]/fieldset/span/input");
 
     

@@ -9,7 +9,6 @@ class PageBase {
     protected WebDriver driver;
     protected WebDriverWait wait;
     
-    
     public PageBase(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
