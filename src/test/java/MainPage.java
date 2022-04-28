@@ -1,5 +1,7 @@
 import org.openqa.selenium.*;
 
+import java.util.Set;
+
 class MainPage extends PageBase {
 
     private By footerBy = By.id("footer");
@@ -79,6 +81,19 @@ class MainPage extends PageBase {
         driver.switchTo().window(mailWindow);
         this.waitAndReturnElement(verifyEmailBy).click();
         this.waitAndReturnElement(verifyEmailLinkBy).click();
+        try {
+            Thread.currentThread().sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Set<String> allWindow = driver.getWindowHandles();
+        for(String current_window : allWindow)
+        {
+            if(!current_window.equals(originalWindow) && !current_window.equals(mailWindow))
+            {
+                driver.switchTo().window(current_window);
+            }
+        }
         this.waitAndReturnElement(registerSetNewPassword).sendKeys(password);
         this.waitAndReturnElement(registerRepeatPassword).sendKeys(password);
         this.waitAndReturnElement(setPasswordSubmit).click();

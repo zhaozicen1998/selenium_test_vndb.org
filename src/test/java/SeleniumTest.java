@@ -135,9 +135,9 @@ public class SeleniumTest {
     // Note!!!!!!: You can only register twice for the same IP in 24 hours
     public void testRegister() {
         MainPage mainPage = new MainPage(this.driver);
-        AfterLoginPage registered = mainPage.register("tigerhy37123","2BjdsDzw9nYnFWM");
+        AfterLoginPage registered = mainPage.register("tigerhyqgr23","2BjdsDzw9nYnFWM");
         String bodyText = registered.getBodyText();
-        Assert.assertTrue(bodyText.contains("tigerhy37123"));
+        Assert.assertTrue(bodyText.contains("tigerhyqgr23"));
     }
 
 
