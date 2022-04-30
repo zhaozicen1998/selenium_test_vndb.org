@@ -29,8 +29,9 @@ class MainPage extends PageBase {
     private By registerSetNewPassword = By.id("newpass1");
     private By registerRepeatPassword = By.id("newpass2");
     private By setPasswordSubmit = By.xpath("/html/body/div[4]/form/fieldset/div[2]/fieldset/span/input");
+    private By logoutBy = By.className("logout");
 
-    
+
     public MainPage(WebDriver driver) {
         super(driver);
         this.driver.get("https://vndb.org/");
@@ -69,6 +70,16 @@ class MainPage extends PageBase {
         String originalWindow = driver.getWindowHandle();
         driver.switchTo().newWindow(WindowType.TAB);
         String mailWindow = driver.getWindowHandle();
+        Set<String> allWindow = driver.getWindowHandles();
+        for(String window : allWindow)
+        {
+            if(!window.equals(originalWindow) && !window.equals(mailWindow))
+            {
+                driver.switchTo().window(window);
+                driver.close();
+            }
+        }
+        driver.switchTo().window(mailWindow);
         this.driver.get("https://www.linshiyouxiang.net/");
         String email = this.waitAndReturnElement(emailAddressBy).getAttribute("data-clipboard-text");
         driver.switchTo().window(originalWindow);
@@ -86,7 +97,7 @@ class MainPage extends PageBase {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Set<String> allWindow = driver.getWindowHandles();
+        allWindow = driver.getWindowHandles();
         for(String current_window : allWindow)
         {
             if(!current_window.equals(originalWindow) && !current_window.equals(mailWindow))
@@ -97,7 +108,7 @@ class MainPage extends PageBase {
         this.waitAndReturnElement(registerSetNewPassword).sendKeys(password);
         this.waitAndReturnElement(registerRepeatPassword).sendKeys(password);
         this.waitAndReturnElement(setPasswordSubmit).click();
-        this.waitAndReturnElement(searchBarBy);
+        this.waitAndReturnElement(logoutBy);
         return new AfterLoginPage(this.driver);
     }
 
